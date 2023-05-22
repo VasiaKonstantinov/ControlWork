@@ -19,12 +19,17 @@ public class SouvenirService {
 
     public void addSouvenir() {
         Souvenir newSouvenir = souvenirDAO.createSouvenir();
+        List<Souvenir> newSou = new ArrayList<>();
         String creator = newSouvenir.getCreatorName();
         int i = 0;
         for (Creator cre: creatorDAO.getCreators()){
             if(cre.getName().equals(creator)){
                 cre.getSouvenirs().add(newSouvenir);
-                creatorDAO.updateCreator(i + 1, cre, cre.getSouvenirs());
+                for(Souvenir souvenir: cre.getSouvenirs()){
+                    Souvenir souvenir1 = new Souvenir(souvenir.getName(), souvenir.creatorName(), souvenir.getYear(), souvenir.getPrice());
+                    newSou.add(souvenir1);
+                }
+                creatorDAO.updateCreator(i + 1, cre, newSou);
                 souvenirDAO.addSouvenir(newSouvenir, cre);
                 return;
             }
