@@ -88,15 +88,21 @@ public class SouvenirService {
         List<Souvenir> newCreatorSouvenir = new ArrayList<>();
         int i = 0;
         for(Souvenir sou: souvenirDAO.getSouvenir()){
-            if(sou.equals(souvenirs.get(i))) {
-                sou.setCreator(newCreator);
-                sou.setCreatorName(newCreator.getName());
-                souvenirDAO.updateSouvenir(i, sou);
-                newCreatorSouvenir.add(sou);
+            for(Souvenir souvenir: souvenirs) {
+                if (sou.equals(souvenir)) {
+                    sou.setCreatorName(newCreator.getName());
+                    souvenirDAO.updateSouvenir(i + 1, sou);
+                    newCreatorSouvenir.add(sou);
+                }
             }
             i++;
         }
-        creatorDAO.updateCreator(index, newCreator, newCreatorSouvenir);
+        List<Souvenir> newSou = new ArrayList<>();
+        for(Souvenir souvenir: newCreatorSouvenir){
+            Souvenir souvenir1 = new Souvenir(souvenir.getName(), souvenir.creatorName(), souvenir.getYear(), souvenir.getPrice());
+            newSou.add(souvenir1);
+        }
+        creatorDAO.updateCreator(index, newCreator, newSou);
     }
 
     public void getAllSouvenirs() {
