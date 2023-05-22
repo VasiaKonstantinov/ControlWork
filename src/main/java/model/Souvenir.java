@@ -73,7 +73,7 @@ public class Souvenir {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Souvenir souvenir = (Souvenir) o;
-        return year == souvenir.year && price == souvenir.price && Objects.equals(name, souvenir.name) && Objects.equals(creatorName, souvenir.creatorName) && Objects.equals(creator, souvenir.creator);
+        return year == souvenir.year && price == souvenir.price && Objects.equals(name, souvenir.name) && Objects.equals(creatorName, souvenir.creatorName);
     }
 
     @Override
