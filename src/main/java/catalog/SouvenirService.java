@@ -75,7 +75,8 @@ public class SouvenirService {
                     }
                 }
             }
-            souvenirDAO.updateSouvenir(index, upSouvenir);
+            Souvenir result = new Souvenir(upSouvenir.getName(), upSouvenir.creatorName(), upSouvenir.getYear(), upSouvenir.getPrice());
+            souvenirDAO.updateSouvenir(index, result);
         }
     }
 
